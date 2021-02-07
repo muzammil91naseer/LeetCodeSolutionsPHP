@@ -59,7 +59,8 @@ class ListNode
             return (String)$this->get_str_val($l1->next).(String)$l1->val;
         }
     }
-    function addTwoNumbers($l1, $l2) {
+    function addTwoNumbers($l1, $l2) 
+    {
 
         $num_1=$this->get_str_val($l1);
         $num_1_arr=str_split($num_1);
@@ -166,5 +167,16 @@ class ListNode
         
     }
 }
+
+$test=new ListNode(5);
+$test->next=new ListNode(7);
+$test->next->next =new ListNode(9);
+
+$test2=new ListNode(2);
+$test2->next=new ListNode(4);
+$test2->next->next =new ListNode(6);
+$sol=new Solution();
+$res=$sol->addTwoNumbers($test,$test2);
+print_r($res);
 
 ?>

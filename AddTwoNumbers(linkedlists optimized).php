@@ -132,4 +132,14 @@ class ListNode
     }
 }
 
+$test=new ListNode(5);
+$test->next=new ListNode(7);
+$test->next->next =new ListNode(9);
+
+$test2=new ListNode(2);
+$test2->next=new ListNode(4);
+$test2->next->next =new ListNode(6);
+$sol=new Solution();
+$res=$sol->addTwoNumbers($test,$test2);
+print_r($res);
 ?>
