@@ -35,33 +35,26 @@ class Solution {
      * @param Integer $x
      * @return Integer
      */
-    function reverse($x) {
-        $str_val=(String)$x;
-        $str_arr=preg_split('//', $str_val, -1, PREG_SPLIT_NO_EMPTY);
-        $index=0;
-        $output="";
-        if($x<0){
-            $output.="-";
-        }
-        for($i=count($str_arr)-1;$i>=0;$i--)
+    function reverse($x) 
+    {
+        $output=0;
+        $temp=$x;
+        while($temp!=0)
         {
+            $remainder=(int)($temp%10);
+            $temp=(int)($temp/10);
+            $output=($output*10)+$remainder;
            
-            if($str_arr[$i]!="-")
-            {
-                $output.=$str_arr[$i];
-            }
-            $index++;
-            
         }
-        $output_int=(int)$output;
-        if(-2147483648<=$output_int && $output_int<=2147483647 )
+        if(-2147483648<=$output && $output<=2147483647 )
         {
-            return $output_int;
+            return $output;
         }
         else
         {
             return 0;
         }
+        
         
        
 
@@ -69,6 +62,7 @@ class Solution {
 }
 
 $obj=new Solution();
-$res=$obj->reverse(-214748364);
+$res=$obj->reverse(214748364);
+print_r($res);
 
 ?>
