@@ -3,6 +3,7 @@
 
 You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
+Difficulty :
  
 
 Example 1:
@@ -38,15 +39,15 @@ class ListNode
              $this->next = $next;
         }
  }
-
-class Solution {
+ class Solution 
+ {
 
     /**
      * @param ListNode $l1
      * @param ListNode $l2
      * @return ListNode
-     */
-    public function get_int_val($l1)
+     * */
+    public function get_str_val($l1)
     {
         if($l1->next=="")
         {
@@ -55,29 +56,99 @@ class Solution {
         else
         {
             
-             return (String)$this->get_int_val($l1->next).(String)$l1->val;
+            return (String)$this->get_str_val($l1->next).(String)$l1->val;
         }
     }
     function addTwoNumbers($l1, $l2) {
 
-        $num_1=$this->get_int_val($l1);
-        $num_2=$this->get_int_val($l2);
-        $sum=$num_1+$num_2;
-        $temp=(int)$sum;
-        
-        $out=array();
-        while($temp!=0)
+        $num_1=$this->get_str_val($l1);
+        $num_1_arr=str_split($num_1);
+        $count_1=count($num_1_arr);
+    
+        $num_2=$this->get_str_val($l2);
+        $num_2_arr=str_split($num_2);
+        $count_2=count($num_2_arr);
+        $max_count=0;
+        if($count_1>$count_2)
         {
-            $remainder=(int)$temp%10;
-            $temp=(int)($temp/10);
-            $out[]=$remainder;
-        
+            $max_count=$count_1;
+        }
+        else
+        {
+            $max_count=$count_2;    
+        }
+        $output_array=array();
+        $carry=0;
+        for ($i=$max_count-1;$i>=0;$i--)
+        {
+            print_r($i);
+            if(isset($num_1_arr[$count_1-1]) && isset($num_2_arr[$count_2-1]))
+            {
+                if(($carry+(int)$num_1_arr[$count_1-1]+(int)$num_2_arr[$count_2-1])>9)
+                {
+                    $output_array[$i]=($carry+(int)$num_1_arr[$count_1-1]+(int)$num_2_arr[$count_2-1])%10;
+                    $carry=1;
+                                                                                                            $count_1--;
+                                                                                                            $count_2--;
+                }
+                else
+                {
+
+                    $output_array[$i]=$carry+(int)$num_1_arr[$count_1-1]+(int)$num_2_arr[$count_2-1];
+                    $carry=0;
+                    $count_1--;
+                                                                                                                $count_2--;
+                }
+
+
+            }else if(!isset($num_1_arr[$count_1-1]))
+            {
+                if(($carry+0+(int)$num_2_arr[$count_2-1])>9)
+                {
+                    $output_array[$i]=($carry+0+(int)$num_2_arr[$count_2-1])%10;
+                    $carry=1;
+                                                                                                            $count_1--;
+                                                                                                            $count_2--;
+                }
+                else
+                {
+
+                    $output_array[$i]=$carry+0+(int)$num_2_arr[$count_2-1];
+                    $carry=0;
+                    $count_1--;
+                                                                                                                $count_2--;
+                }
+            }
+            else if(!isset($num_2_arr[$count_2-1]))
+            {
+                if(($carry+(int)$num_1_arr[$count_1-1]+0)>9)
+                {
+                    $output_array[$i]=($carry+0+(int)$num_1_arr[$count_1-1])%10;
+                    $carry=1;
+                                                                                                            $count_1--;
+                                                                                                            $count_2--;
+                }
+                else
+                {
+
+                    $output_array[$i]=$carry+0+(int)$num_1_arr[$count_1-1];
+                    $carry=0;
+                    $count_1--;
+                                                                                                                $count_2--;
+                }
+            }
+            
+            
+        }
+        if($carry==1)
+        {
+            $output_array[]=1;
         }
         $output=new ListNode();
         $head=$output;
-        $count=count($out);
+        $count=count($output_array);
         $index=0;
-        foreach($out as $val)
+        foreach($output_array as $val)
         {
             $output->val=$val;
             if($index<$count-1)
@@ -88,10 +159,11 @@ class Solution {
             }
             
             $index++;
-          
+        
         }
         
         return $head;
+        
     }
 }
 
