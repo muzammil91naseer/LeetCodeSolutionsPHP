@@ -73,7 +73,6 @@ class Solution {
 
         ];
         $valid_chunks=Array();
-        $int_val=0;
         for($i=0;$i<$count;$i++)
         {
             // case 1
