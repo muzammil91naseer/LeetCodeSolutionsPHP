@@ -62,7 +62,7 @@ class Solution {
 }
 
 $obj=new Solution();
-$res=$obj->reverse(214748364);
+$res=$obj->reverse(-2147483648);
 print_r($res);
 
 ?>
