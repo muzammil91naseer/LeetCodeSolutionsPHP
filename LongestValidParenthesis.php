@@ -42,97 +42,97 @@ class Solution {
  * @param String $s
  * @return Integer
  */
-function longestValidParentheses($s) 
-    {
+function longestValidParentheses($s) {
         $validator=array();
         $stack=array();
         $stack_index=0;
         $counter=0;
-        $s_arr=str_split($s);
+        $s_array=str_split($s);
+        $s_arr=array();
         $count=array();
         $count[$counter]=0;
         $index=0;
-        for($i=0;$i<count($s_arr);$i++)
+        for($i=0;$i<count($s_array);$i++)
         {
-            $s_arr[$i]=['status'=>0,'value'=>$s_arr[$i],'index'=>$i];
+            $s_arr[$i]=array('status'=>0,'value'=>$s_array[$i],'index'=>$i);
         }
-        foreach($s_arr as $val)
+        foreach($s_arr as $key => $val)
         {
-            //print_r($val);
             if(!isset($stack[0]))
             {
                 if($val['value']=="(")
                 {
                     array_unshift($stack,$val);
-                    $stack_index++;
-                    
-                    
                 }else
                 {
                     $counter++;
                 }
-                
             }
             else
             {
                 if($val['value']=="(")
                 {
-                    if($stack[0]=="(")
+                    if($stack[0]["value"]=="(")
                     {
                         array_unshift($stack,$val);
-                        $stack_index++;
-                        
-                        
                     }
                     else
                     {
                         $counter++;
                         $count[$counter]=0;
-                        
                     }
-                   
-                    
                 }
                 else if($val['value']==")")
                 {
-                    
-                    if($stack[0]=="(")
+                    if($stack[0]["value"]=="(")
                     {
-                        print_r("here");
                         $output=array_shift($stack);
                         $s_arr[$output['index']]['status']=1;
                         $s_arr[$index]['status']=1;
-                        print_r($s_arr);
-                        $stack_index--;
-                        
                         $count[$counter]=$count[$counter]+1;
-                        
-                    
                     }else
                     {
                         $counter++;
                         $count[$counter]=0;
-                    
                     }
-                    
-                    
                 }
            }
             $index++;
-        
         }// end loop
-       //print_r($s_arr);
+        $j=0;
+        $counts_final=array();
+        foreach($s_arr as $val)
+        {
+            if($val["status"]==1)
+            {
+                if(isset($counts_final[$j]))
+                {
+                    $counts_final[$j]=$counts_final[$j]+1;
+                }
+                else{
+                    $counts_final[$j]=1;
+                }
+            }
+            if($val["status"]==0)
+            {
+                $j++;
+            }
+        }
         $max_count=0;
-        foreach($count as $val)
+        foreach($counts_final as $val)
         {
             if($val>$max_count)
             {
                 $max_count=$val;
             }
         }
-        $max_count=$max_count*2;
+        //echo '<pre>',print_r($max_count,1),'</pre>';
         return $max_count;
-        
     }
 }
+$obj=new Solution();
+$s="(()(()))";
+//print_r($s);
+$res=$obj->longestValidParentheses($s);
+
 ?>
