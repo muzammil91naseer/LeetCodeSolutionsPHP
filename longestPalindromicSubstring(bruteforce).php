@@ -21,7 +21,7 @@ class Solution {
         return $out;
         
     }
-    function get_palindrom_length($str)
+    function get_palindrom_string($str)
     {
         $valid_palindrom=1;
         $arr=str_split($str);
@@ -57,7 +57,7 @@ class Solution {
             $count_arr=count($sub_strings);
             for($i=0;$i<$count_arr;$i++)
             {
-                $palindrom_string=$this->get_palindrom_length($sub_strings[$i]);
+                $palindrom_string=$this->get_palindrom_string($sub_strings[$i]);
                 if(strlen($max_str)<strlen($palindrom_string) && $palindrom_string!=null )
                 {
                     $max_str=$palindrom_string;
