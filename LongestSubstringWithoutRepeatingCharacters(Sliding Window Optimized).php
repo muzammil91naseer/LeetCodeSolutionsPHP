@@ -1,4 +1,4 @@
-<?
+<?php
 /*Given a string s, find the length of the longest substring without repeating characters.
 
  
@@ -30,9 +30,6 @@ Constraints:
 0 <= s.length <= 5 * 104
 s consists of English letters, digits, symbols and spaces.
 */
-error_reporting(0);
-ini_set('display_errors', 0);
-ini_set ( 'max_execution_time', 0);
 
 class Solution {
 
@@ -59,11 +56,8 @@ class Solution {
             {
                 for($j=$i;$j<$length;$j++)
                 {
-                    //print_r("i:  ".$i."  \n");
-                    //print_r("j:  ".$j."  \n");
                     if(isset($hash[$str_arr[$j]]) && $hash[$str_arr[$j]] !=-1 )
                     {
-                        
                         if($i<$hash[$str_arr[$j]])
                         {
                             $i=$hash[$str_arr[$j]];
@@ -76,12 +70,9 @@ class Solution {
                         }
                         
                         $hash[$str_arr[$j]]=$j+1;
-                        
-                        
                     }
                     else
                     {
-                        
                         $max_local=$j-$i+1;
                         if($max < $max_local)
                         {
@@ -90,22 +81,9 @@ class Solution {
                         $hash[$str_arr[$j]]=$j+1;
                     }
                     
-                    /*
-                    print_r("Hash: \n");
-                    print_r($hash);
-                    print_r("\n");
-                    print_r("Max : ");
-                    print_r($max);
-                    print_r("\n");
-                    print_r("i:  ".$i."  \n");
-                    print_r("j:  ".$j."  \n");
-                    print_r("end block \n");
-                    */
-                    
                 }
                 
             }
-            
             return $max;
             
         }else{
@@ -113,5 +91,9 @@ class Solution {
         }
     }
 }
+
+$sol=new Solution();
+$out=$sol->lengthOfLongestSubstring("abcabcbb");
+print_r($out);
 
 ?>
